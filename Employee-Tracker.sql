@@ -1,8 +1,8 @@
 -- Create the database seinfeld and specified it for use.
-
 CREATE DATABASE employee_trackedb;
 
 USE employee_trackerdb;
+
 
 -- Create the table actors.
 CREATE TABLE department (
@@ -31,15 +31,56 @@ CREATE TABLE employee (
   FOREIGN KEY(manager_id) REFERENCES id
 );
 
--- Insert a set of records.
+-- Insert a set of sample employees.
 INSERT INTO department (name)
-VALUES ("", "", "");
+VALUES ("IT");
 
--- INSERT INTO characters (name, coolness_points, attitude)
--- VALUES ("Elaine", 80, "righteous");
+INSERT INTO role (title, salary, department_id)
+VALUES ("Development", 23000, 2);
 
--- INSERT INTO characters (name, coolness_points, attitude)
--- VALUES ("Kramer", 20, "doofus");
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Johnny", "Dewar"); 
 
--- INSERT INTO characters (name, coolness_points, attitude)
--- VALUES ("George", 70, "selfish");
+--
+
+INSERT INTO department (name)
+VALUES ("Main Office");
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("CEO", 100000, 1);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Jack", "Jones");
+
+-- 
+
+INSERT INTO department (name)
+VALUES ("Sales");
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("Head of marketing", 50000, 3);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Bob", "Bobinson");
+
+--
+
+INSERT INTO department (name)
+VALUES ("Sales");
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("Salesperson", 35000, 3);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Ron", "Billson");
+
+--
+
+INSERT INTO department (name)
+VALUES ("IT");
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("Debugging", 28000, 2);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Bob", "Bobinson", );
