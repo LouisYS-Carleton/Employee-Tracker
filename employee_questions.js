@@ -337,12 +337,35 @@ function addEmployeeRole(data) {
 
 // Update employee role
     // Ask role
-// function updateRole() {
-// }
-
-    // Add collected info to employee role
-// function updateEmployeeRole(data) {
-// }
+function updateRole() {
+    inquirer
+    .prompt([
+    {
+        type: "list",
+        message: "Please select which employee whose role you wish to change.",
+        name: "empID",
+        choices: employees
+    },
+    {
+        type: "list",
+        message: "Please enter employee's new role.",
+        name: "titleID",
+        choices: roles
+    }
+    ])
+    .then(function (response) {
+    updateEmployeeRole(response);
+    })
+}
+      
+     // Add collected info to employee role
+function updateEmployeeRole(data) {
+    connection.query(`UPDATE employee SET role_id = ${data.titleID} WHERE id = ${data.empID}`,
+    function (error, res) {
+        if (error) throw error;
+    });
+    endOrMenu();
+}
 
 // Continue prompt
 function endOrMenu() {
