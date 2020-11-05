@@ -1,10 +1,7 @@
--- Create the database seinfeld and specified it for use.
 CREATE DATABASE employee_trackedb;
-
 USE employee_trackerdb;
 
 
--- Create the table actors.
 CREATE TABLE department (
   `id` INTEGER AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
@@ -17,7 +14,7 @@ CREATE TABLE role (
   `salary` DECIMAL NOT NULL,
   `department_id` INTEGER NOT NULL,
   PRIMARY KEY(id),
-  FOREIGN KEY(department_id) REFERENCES department.id
+  CONSTRAINT fk_department FOREIGN KEY (department_id) References department(id) on delete cascade
 );
 
 CREATE TABLE employee (
@@ -27,11 +24,12 @@ CREATE TABLE employee (
   `role_id` INTEGER NOT NULL,
   `manager_id` INTEGER NOT NULL,
   PRIMARY KEY(id),
-  FOREIGN KEY(role_id) REFERENCES role.id,
-  FOREIGN KEY(manager_id) REFERENCES id
+  role_id INT NOT NULL,
+  manager_id INT,
+  CONSTRAINT fk_department FOREIGN KEY (manager_id) References employee(id) on delete set null
 );
 
--- Insert a set of sample employees.
+
 INSERT INTO department (name)
 VALUES ("IT");
 
@@ -84,3 +82,5 @@ VALUES ("Debugging", 28000, 2);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Bob", "Bobinson", );
+
+

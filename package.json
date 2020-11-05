@@ -1,0 +1,25 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "An employee tracking software",
+  "main": "employee_questions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LouisYS-Carleton/Employee-Tracker.git"
+  },
+  "author": "Louis YS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LouisYS-Carleton/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/LouisYS-Carleton/Employee-Tracker#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "inquirer-confirm": "^2.0.7",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5"
+  }
+}
