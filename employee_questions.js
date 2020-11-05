@@ -254,6 +254,7 @@ function removeEmployee(){
     })
 }
 
+// View all departments
 function viewAllDepartments() {
     console.log("view all departments")
     connection.query("SELECT * from department", function (error, res) {
@@ -262,7 +263,7 @@ function viewAllDepartments() {
     })
 }
   
-  // View all roles
+// View all roles
 function viewAllRoles() {
     connection.query("SELECT * from role", function (error, res) {
         console.table(res);
