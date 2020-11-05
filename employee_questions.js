@@ -19,17 +19,17 @@ let employees;
 // Testing connection with sql and checking tables
 connection.connect(function (err) {  
     if (err) {
-    console.error("Error connecting: " + err.stack);
-    return;
+        console.error("Error connecting: " + err.stack);
+        return;
     }
     console.log("Connected as ID " + connection.threadId);
 
     connection.query("SELECT * FROM role", function (error, res) {
-    roles = res.map(role => ({ name: role.title, value: role.id }))
+        roles = res.map(role => ({ name: role.title, value: role.id }))
     })
 
     connection.query("SELECT * FROM department", function (error, res) {
-    departments = res.map(dep => ({ name: dep.name, value: dep.id }))
+        departments = res.map(dep => ({ name: dep.name, value: dep.id }))
     })
 
     connection.query("SELECT * from employee", function (error, res) {
@@ -40,7 +40,7 @@ connection.connect(function (err) {
 
 // Display menu to user
 function showMenu() {
-  inquirer
+    inquirer
     .prompt
         ({
             type: "list",
@@ -139,7 +139,7 @@ function menu(option) {
 // Prompts
 // View all employees
 function viewAllEmployees() {
-  connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id;", function (error, res) {
+    connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id;", function (error, res) {
     console.table(res);
     endOrMenu();
   })
@@ -147,7 +147,7 @@ function viewAllEmployees() {
 
 // View dept employees
 function viewEmployeesDepartment() {
-   inquirer
+    inquirer
     .prompt([
         {
             type: "list",
@@ -169,22 +169,22 @@ function viewEmployeesDepartment() {
 // View manager employees
 function viewEmployeesManager() {
     inquirer
-        .prompt([
-        {
-            type: "list",
-            message: "Please select manager.",
-            name: "name",
-            choices: employees
-        }
-        ])
-        .then(function (response) {
-        console.log("View Employees")
-        connection.query("SELECT employee.first_name,employee.last_name FROM employee WHERE manager_id = ?", [response.name], 
-        function (error, res) {
-                console.table(res);
-                endOrMenu();
-        })
-        })
+    .prompt([
+    {
+        type: "list",
+        message: "Please select manager.",
+        name: "name",
+        choices: employees
+    }
+    ])
+    .then(function (response) {
+    console.log("View Employees")
+    connection.query("SELECT employee.first_name,employee.last_name FROM employee WHERE manager_id = ?", [response.name], 
+    function (error, res) {
+        console.table(res);
+        endOrMenu();
+    })
+    })
 }
 
 // Add employee
@@ -221,14 +221,14 @@ function addEmployee() {
 
     // Add info to employee
 function addEmployees(data) {
-  connection.query("INSERT INTO employee SET ?",
+    connection.query("INSERT INTO employee SET ?",
     {
-      first_name: data.firstName,
-      last_name: data.lastName,
-      role_id: data.title,
-      manager_id: data.manager
+        first_name: data.firstName,
+        last_name: data.lastName,
+        role_id: data.title,
+        manager_id: data.manager
     }, function (error, res) {
-      if (error) throw error;
+        if (error) throw error;
     })
     endOrMenu();
 }
@@ -254,22 +254,46 @@ function removeEmployee(){
     })
 }
 
-// View all departments
-// function viewAllDepartments() {
-// }
-
-// View all roles
-// function viewAllRoles() {
-// }
-
-// Add a new department
-    // get info
-// function addDept() {
-// }
-
+function viewAllDepartments() {
+    console.log("view all departments")
+    connection.query("SELECT * from department", function (error, res) {
+      console.table(res);
+      endOrMenu();
+    })
+}
+  
+  // View all roles
+function viewAllRoles() {
+    connection.query("SELECT * from role", function (error, res) {
+        console.table(res);
+        endOrMenu();
+    })
+}
+  
+  // Add a new department
+      // get info
+function addDept() {
+    inquirer
+    .prompt([
+    {
+        type: "input",
+        message: "Please enter name of new department.",
+        name: "name"
+    }
+    ])
+    .then(function (response) {
+        addDepartment(response);
+    })
+}
     // add dept
-// function addDepartment(data) {
-// }
+function addDepartment(data) {
+    connection.query("INSERT INTO department SET ?", { name: data.name },
+    function (error, res) {
+        if (error) throw error;
+    });
+    endOrMenu();
+}
+  
 
 // Add new role info
 // function addRole() {
@@ -290,8 +314,8 @@ function removeEmployee(){
 
 // Continue prompt
 function endOrMenu() {
-  confirm("Would you like to continue?")
-  .then(function confirmed() { 
+    confirm("Would you like to continue?")
+    .then(function confirmed() { 
             showMenu(); 
         }, 
         function cancelled() { 
@@ -301,7 +325,7 @@ function endOrMenu() {
 
 // Final message
 function end() {
-  console.log("Thank you for using Employee Tracker!");
-  connection.end();
-  process.exit();
+    console.log("Thank you for using Employee Tracker!");
+    connection.end();
+    process.exit();
 }
