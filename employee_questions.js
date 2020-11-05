@@ -297,12 +297,43 @@ function addDepartment(data) {
   
 
 // Add new role info
-// function addRole() {
-// }
+function addRole() {
+    inquirer
+    .prompt([
+    {
+        type: "input",
+        message: "Please enter name of new employee role.",
+        name: "title"
+    },
+    {
+        type: "input",
+        message: "Please enter new role's salary.",
+        name: "salary"
+    },
+    {
+        type: "list",
+        message: "Please enter the department this role falls under.",
+        name: "id",
+        choices: departments
+    }
+    ])
+    .then(function (response) {
+    addEmployeeRole(response);
+    })
+}
 
 // Add new employee role collected
-// function addEmployeeRole(data) {
-// }
+function addEmployeeRole(data) {
+    connection.query("INSERT INTO role SET ?", {
+      title: data.title,
+      salary: data.salary,
+      department_id: data.id
+    }, function (error, res) {
+      if (error) throw error;
+    });
+    endOrMenu();
+}
+  
 
 // Update employee role
     // Ask role
