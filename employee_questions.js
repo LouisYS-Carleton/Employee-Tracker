@@ -235,8 +235,24 @@ function addEmployees(data) {
 
 
 // Remove employee
-// function removeEmployee(){
-// }
+function removeEmployee(){
+    inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "Please enter employee's name.",
+        name: "name",
+        choices: employees
+      }
+    ])
+    .then(function (response) {
+        console.log("View Employees")
+        connection.query("DELETE FROM employee WHERE id = ?", [response.name], function (error, res) {
+            console.log("Employee has been deleted.");
+            endOrMenu();
+        })
+    })
+}
 
 // View all departments
 // function viewAllDepartments() {
