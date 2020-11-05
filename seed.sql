@@ -23,5 +23,6 @@ VALUES
     ('Bill', 'Realies', 6, 1), 
     ('Omar', 'Mohammed', 2, 1), 
     ('Louis', 'Troullion', 2, 1),
-	('Peter', 'Nguyen', 3, 2)
+	('Peter', 'Nguyen', 3, 4),
+    ('Laura', 'John-Jackson', 7, null)
 ;
