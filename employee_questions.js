@@ -71,17 +71,13 @@ function showMenu() {
             name: "Update employee role",
             value: "updateRole"
         },
-		{
-            name: "Update employee Manager",
-            value: "updateEmployeeManager"
-        },
         {
             name: "View all departments",
             value: "viewDepartments"
         },
         {
             name: "View all roles",
-            value: "viewRoles"
+            value: "viewAllRoles"
         },
         {
             name: "Add new department",
@@ -114,6 +110,9 @@ function menu(option) {
             break;  
         case "viewDepartments":
             viewAllDepartments();
+            break;
+        case "viewAllRoles":
+            viewAllRoles();
             break;
         case "removeEmployee":
             removeEmployee();
@@ -265,6 +264,7 @@ function viewAllDepartments() {
   
 // View all roles
 function viewAllRoles() {
+    console.log("view all roles")
     connection.query("SELECT * from role", function (error, res) {
         console.table(res);
         endOrMenu();

@@ -24,5 +24,6 @@ VALUES
     ('Omar', 'Mohammed', 2, 1), 
     ('Louis', 'Troullion', 2, 1),
 	('Peter', 'Nguyen', 3, 4),
-    ('Laura', 'John-Jackson', 7, null)
+    ('Laura', 'John-Jackson', 7, null),
+    ('Billy', 'Bobby', 8, 7)
 ;
